@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="bao.jt.tong.dao.UserMapper">
+    <select id="findBookByName" resultType="bao.jt.tong.domain.Book"  parameterType="java.util.HashMap">
+        SELECT * FROM book
+        <where>
+            <if test="name!=null and name!=''">
+                name like concat('%',#{name},'%')
+            </if>
+        </where>
+        LIMIT #{page},#{size}
+    </select>
+
+    <insert id="saveBook" parameterType="java.util.HashMap">
+        INSERT INTO book(name,money) VALUES (#{name},#{money})
+    </insert>
+
+    <select id="login" resultType="java.lang.Integer"  parameterType="java.util.HashMap">
+      SELECT COUNT(*) FROM user WHERE username=#{username} AND `password`=#{password}
+    </select>
+
+    <select id="query" resultType="bao.jt.tong.domain.Book">
+        SELECT * FROM book
+    </select>
+</mapper>

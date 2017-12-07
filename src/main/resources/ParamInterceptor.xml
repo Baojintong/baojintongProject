@@ -1,0 +1,14 @@
+<Controllers>
+    <Controller>
+        <ControllerName>Login</ControllerName>
+        <Param>username</Param>
+        <Param>password</Param>
+    </Controller>
+    <Controller>
+        <ControllerName>Register</ControllerName>
+        <Param>username</Param>
+        <Param>password</Param>
+        <Param>name</Param>
+        <Param>phone</Param>
+    </Controller>
+</Controllers>
