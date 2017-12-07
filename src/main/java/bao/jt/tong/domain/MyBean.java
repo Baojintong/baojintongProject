@@ -1,5 +1,8 @@
 package bao.jt.tong.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class MyBean {
 //    private StringRedisTemplate template;
 //    @Autowired

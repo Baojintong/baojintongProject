@@ -32,3 +32,11 @@ spring:
       jdbcUrl: jdbc:mysql://103.50.253.167:3306/db1?useUnicode=true&characterEncoding=UTF-8
       username: root
       password: 941108
+
+
+management:
+  security:
+    enabled: false
+endpoints:
+  health:
+    sensitive: false

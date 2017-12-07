@@ -12,7 +12,7 @@ public class InterceptorConfig extends WebMvcConfigurerAdapter {
     public void addInterceptors(InterceptorRegistry registry) {
         // addPathPatterns 用于添加拦截规则
         // excludePathPatterns 用户排除拦截
-        registry.addInterceptor(new ParamInterceptor()).addPathPatterns("/Book");
-        super.addInterceptors(registry);
+        //registry.addInterceptor(new ParamInterceptor()).addPathPatterns("/Book");
+        //super.addInterceptors(registry);
     }
 }
