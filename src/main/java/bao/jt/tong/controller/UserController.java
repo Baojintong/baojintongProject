@@ -2,6 +2,7 @@ package bao.jt.tong.controller;
 
 import bao.jt.tong.dao.UserMapper;
 import bao.jt.tong.domain.HelloService;
+import bao.jt.tong.util.RedisUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class UserController {
 
     @Autowired
     UserMapper dao;
+    @Autowired
+    RedisUtils redisUtils;
     @Autowired
     private HelloService helloService;
 
@@ -47,6 +50,8 @@ public class UserController {
 
     @RequestMapping("/auto/home")
     public String home(){
+        redisUtils.set("aa","bbbb");
+        System.out.println(redisUtils.get("aa"));
         return helloService.say();
     }
 

@@ -10,10 +10,10 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by BJT on 2017/11/24.
  */
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        Num u1 = new Num();
-        Num u2 = new Num();
-        final CountDownLatch latch = new CountDownLatch(10);
+    public static void main(String[] args) throws InterruptedException, ClassNotFoundException {
+//        Num u1 = new Num();
+//        Num u2 = new Num();
+//        final CountDownLatch latch = new CountDownLatch(10);
 //        for (int i=0;i<10;i++) {
 //            (new Thread() {
 //                @Override
@@ -56,17 +56,25 @@ public class Main {
 //                        10, 30,
 //                        TimeUnit.SECONDS, queue);//未设置异常处理器
 //        executor2.execute(new Run1());//默认的异常处理器--发生了异常  java.lang.RuntimeException
-        final ThreadLocal<String> tl=new ThreadLocal<String>();
-        tl.set("123");
-        String a=tl.get();
-        tl.remove();
-        System.out.println(a);
-        new Thread(){//观察该线程和fun1线程之间的数据是否有共享
-            public void run() {
-                System.out.println(tl.get());
-            }
-        }.start();
-
+//        final ThreadLocal<String> tl=new ThreadLocal<String>();
+//        tl.set("123");
+//        String a=tl.get();
+//        tl.remove();
+//        System.out.println(a);
+//        new Thread(){//观察该线程和fun1线程之间的数据是否有共享
+//            public void run() {
+//                System.out.println(tl.get());
+//            }
+//        }.start();
+        Class c = Class.forName("bao.jt.tong.condition.MyCondition");
+        System.out.println(c);//class bao.jt.tong.condition.MyCondition
+        Class c2=null;
+        try {
+            c2 = Class.forName("bao.jt.tong.condition.MyCondition222");
+        }catch (ClassNotFoundException e){
+            System.out.println("不存在实体类");//不存在实体类
+        }
+        System.out.println(c2);//null
 
     }
 }
