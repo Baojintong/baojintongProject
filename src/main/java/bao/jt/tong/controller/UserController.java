@@ -52,6 +52,7 @@ public class UserController {
     public String home(){
         redisUtils.set("aa","bbbb");
         System.out.println(redisUtils.get("aa"));
+        //System.out.println(emails);
         return helloService.say();
     }
 
