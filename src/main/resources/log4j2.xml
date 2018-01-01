@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="info">
+    <Properties>
+        <Property name="LOG_HOME">logs</Property>
+        <Property name="APP_LOG_HOME">${LOG_HOME}/his</Property>
+        <Property name="LEVEL">DEBUG</Property><!--可通过此参数控制日志输出等级，运维用INFO 开发用DEBUG-->
+    </Properties>
+    <!--appender-->
+    <appenders>
+        <console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern=" %d [%t][%p][%c %L] - %m%n"/>
+            <ThresholdFilter level="${LEVEL}" onMatch="ACCEPT" onMismatch="DENY"/>
+        </console>
+        <RollingFile name="RollingFile" fileName="${LOG_HOME}/client.log"
+                     filePattern="${APP_LOG_HOME}/%d{yyyy-MM-dd}/client-%d{yyyy-MM-dd}.log.gz">
+            <ThresholdFilter level="${LEVEL}" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d [%t][%p][%c %L] - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="2"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${APP_LOG_HOME}" maxDepth="2">
+                    <IfFileName glob="*/client-*.log.gz" />
+                    <IfLastModified age="30d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+    </appenders>
+
+    <loggers>
+        <logger name="org.springframework" level="INFO"></logger>
+        <logger name="org.hibernate" level="INFO"></logger>
+        <root level="OFF">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </root>
+    </loggers>
+</configuration>

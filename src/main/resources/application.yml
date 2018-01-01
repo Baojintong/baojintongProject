@@ -17,7 +17,7 @@ server:
 mybatis:
   config-location: classpath:mybatis_config.xml
 logging:
-  config: classpath:logback.xml
+  config: classpath:log4j2.xml
 hello:
   msg: world
 
