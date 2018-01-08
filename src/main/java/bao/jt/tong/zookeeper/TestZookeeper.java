@@ -6,7 +6,7 @@ import org.apache.zookeeper.*;
 import java.util.concurrent.CountDownLatch;
 
 /*
-* 使用异步API创建一个节点
+* 使用异步API删除一个节点
 * */
 public class TestZookeeper implements Watcher{
     private static CountDownLatch countDownLatch=new CountDownLatch(1);
@@ -14,13 +14,11 @@ public class TestZookeeper implements Watcher{
         ZooKeeper zooKeeper=
                 new ZooKeeper("localhost:2181",5000,
                         new TestZookeeper());
-
+        String path="/zk-baojintong-111";
         countDownLatch.await();
-        String path1=zooKeeper.create("/zk-baojintong","baojintong".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
-        //在这里如果创建临时性节点，创建完成后在客户端命令行是查不到的，如果想要能够查到，那么需要创建持久性节点
-        System.out.println("创建成功"+path1);
-        String path2=zooKeeper.create("/zk-baojintong","baojintong".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL_SEQUENTIAL);
-        System.out.println("创建成功"+path2);
+        zooKeeper.create(path,"baojintong1".getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.EPHEMERAL);
+        zooKeeper.delete(path,-1,new IStringCallback(),"context");
+        Thread.sleep(Integer.MAX_VALUE);
     }
 
     @Override
@@ -28,5 +26,11 @@ public class TestZookeeper implements Watcher{
         if(Event.KeeperState.SyncConnected==watchedEvent.getState()){
             countDownLatch.countDown();
         }
+    }
+}
+class IStringCallback implements AsyncCallback.VoidCallback{
+    @Override
+    public void processResult(int i, String s, Object o) {
+        System.out.println(i+"---"+s+"---"+o);//0---/zk-baojintong-111---context
     }
 }
