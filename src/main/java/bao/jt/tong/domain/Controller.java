@@ -7,6 +7,13 @@ import javax.xml.bind.annotation.XmlType;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * <p>Title: Controller</p>
+ * <p>Description: </p>
+ * @author baojintong
+ * @date 2017/12/27 23:35
+ * @version 1.0
+ */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "Controller")
 @XmlType(propOrder = { "ControllerName", "Param" })

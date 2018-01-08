@@ -37,6 +37,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     /**
+     * Gets mongoTemplate
+     *
+     * @return value of $mongoTemplate
+     */
+    public MongoTemplate getMongoTemplate() {
+        return mongoTemplate;
+    }
+
+    /**
      * 更新对象
      * @param user
      */
